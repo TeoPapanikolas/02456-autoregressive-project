@@ -7,12 +7,12 @@ from torch.utils.data import DataLoader
 from protgen.data import AA, FAMILIES, IGNORE_INDEX, special_tokens
 
 class AutoregressiveMLP(nn.Module):
-    def __init__(self, vocab_size, context_size=16, embed_dim=32, hidden_dim=128):
+    def __init__(self, vocab_size, context_size, embed_dim, hidden_dim):
         super().__init__()
 
-        self.context_size = context_size
-        self.embedding = nn.Embedding(vocab_size, embed_dim)
         self.net = nn.Sequential(
+            nn.Embedding(vocab_size, embed_dim),
+            nn.Flatten(),
             nn.Linear(context_size * embed_dim, hidden_dim),
             nn.ReLU(),
             nn.Linear(hidden_dim, hidden_dim),
@@ -21,12 +21,6 @@ class AutoregressiveMLP(nn.Module):
         )
 
     def forward(self, x):
-        # x: (batch_size, context_size)
-        x = self.embedding(x)
-
-        # Flatten embeddings
-        x = x.reshape(x.size(0), -1)
-
         return self.net(x)
 
     
