@@ -68,9 +68,9 @@ print(f"classification loss: {F.cross_entropy(logits_fam, y):.4f}")
 
 
 # Param setting
-num_epochs = 5
+num_epochs = 100
 vocab_size = train_data.vocab_size
-context_size = 16 # 32, 64, 128
+context_size = 3 # 16, 32, 64, 128
 embed_dim = 32
 hidden_dim = 128
 pad_id = 0
@@ -101,6 +101,7 @@ for epoch in range(num_epochs):
             step = 1
         )
 
+        # B: batch_size; L: length; C: context_size
         B, L, C = windows.shape
 
         inputs = windows.reshape(B * L, C)
@@ -149,19 +150,10 @@ def generate(model, bos_id, eos_id, pad_id, max_length=128, temperature=1.0):
 
     return tokens[1:]
 
-for num in range(19):
-    generated = generate(model, bos_id=bos_id, eos_id=eos_id, pad_id=pad_id, max_length=128)
-
-    sequence = ''.join(
-        vocab[i]
-        for i in generated
-    )
-print(sequence)
-
 vocab = {v: k for k, v in train_data.vocab.items()}
 rows = []
 
-for num in range(19):
+for num in range(100):
     generated = generate(model, bos_id=bos_id, eos_id=eos_id, pad_id=pad_id, max_length=128)
     sequence = ''.join(
         vocab[i] for i in generated
