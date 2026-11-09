@@ -240,4 +240,4 @@ runs/
 tests/
 .DS_Store
 
-.vscode/
+.vscode/core.*

@@ -21,9 +21,9 @@
 ##BSUB -N
 
 set -eu
-cd "$(dirname "$0")/.."
+cd "${LS_SUBCWD:-$(dirname "$0")/..}"
 
-SETS="control_real control_shuffled mock_data"
+SETS="control_real control_shuffled mock_data mlp"
 
 for NAME in $SETS; do
     SAMPLES="results/sequences/$NAME.csv"
