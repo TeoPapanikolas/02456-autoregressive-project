@@ -1,0 +1,13 @@
+Model Selection: LSTM vs. Transformer
+
+We selected Long Short-Term Memory (LSTM) as our main architecture for autoregressive protein sequence generation. Previous research has demonstrated that LSTM-based models can learn meaningful biological representations from amino acid sequences [1]. Moreover, Ebrahimi et al. [2] showed that recurrent neural networks can achieve better data efficiency than Transformers in certain sequence state-tracking tasks, suggesting a potential advantage of recurrent inductive biases in data-limited settings.
+
+Although Transformers have demonstrated superior performance in large-scale protein language modeling [3], our training dataset contains approximately 16,000 protein sequences, and our computational resources are limited. Therefore, we chose LSTM as a practical architecture that supports sequential next-token prediction while keeping the model relatively simple and manageable. This choice does not imply that LSTM universally outperforms Transformers, but rather represents a reasonable balance between modeling capability, architectural complexity, and available resources.
+
+References
+
+[1] E. C. Alley *et al.*, "Unified rational protein engineering with sequence-based deep representation learning," *Nature Methods*, vol. 16, pp. 1315–1322, 2019.
+
+[2] Ebrahimi *et al.*, "On the 'Induction Bias' in Sequence Models," in *Proceedings of the 43rd International Conference on Machine Learning (ICML)*, *Proceedings of Machine Learning Research*, vol. 306, pp. 27550–27568, 2026.
+
+[3] A. Rives *et al.*, "Biological structure and function emerge from scaling unsupervised learning to 250 million protein sequences," *Proceedings of the National Academy of Sciences*, vol. 118, no. 15, Art. no. e2016239118, 2021.
