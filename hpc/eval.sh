@@ -23,7 +23,7 @@
 set -eu
 cd "${LS_SUBCWD:-$(dirname "$0")/..}"
 
-SETS="generated_LSTM"
+SETS="generated_MLP_200 generated_LSTM_200 control_real control_shuffled"
 
 for NAME in $SETS; do
     SAMPLES="results/sequences/$NAME.csv"
